@@ -29,7 +29,8 @@ public class CustomerService implements ICustomerService {
 		Scanner scan = new Scanner(System.in);
 		
 		AbstractApplicationContext context=new GenericXmlApplicationContext("application-config.xml");
-		CustomerInputData custInput = new CustomerInputData();
+		//CustomerInputData custInput = new CustomerInputData();
+		CustomerInputData custInput = (CustomerInputData)context.getBean("custInput");
 		CustomerPrintData custPrint = new CustomerPrintData();
 		CustomerDeleteData custDelete = new CustomerDeleteData();
 		CustomerUpdateData custUpdate = new CustomerUpdateData();
