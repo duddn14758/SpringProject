@@ -33,7 +33,7 @@ public class CustomerInputData implements ICustomerRepository {
 
 	@Override
 	public boolean run(Customer cust) {
-		String sql = "insert into info (name, gender, email, birthday) values (?,?,?,?)";
+		String sql = "insert into customer (name, gender, email, birthday) values (?,?,?,?)";
 		jdbcTemplate.update(sql, 
 				new Object[] { cust.getName(), String.valueOf(cust.getGender()), cust.getEmail(),
 				String.valueOf(cust.getBirthYear()) });

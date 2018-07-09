@@ -35,7 +35,7 @@ public class CustomerPrintData implements ICustomerRepository {
 	@Override
 	public boolean run(Customer cust) {
 		Customer custPrint = new Customer();
-		String sql = "select name, gender, email, birthyear "
+		String sql = "select name, gender, email, birthday "
 				+ "from customer where name=?";		
 		custPrint = jdbcTemplate.queryForObject(sql, new CustomerMapper(), cust.getName());
 		

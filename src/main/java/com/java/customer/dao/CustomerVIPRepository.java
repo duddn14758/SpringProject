@@ -32,7 +32,7 @@ public class CustomerVIPRepository implements ICustomerVIPRepository {
 	JdbcTemplate jdbcTemplate;
 
 	public boolean insertData(Customer cust) {
-		String sql = "insert into customer (name, gender, email, birthyear) values (?,?,?,?)";
+		String sql = "insert into customer (name, gender, email, birthday) values (?,?,?,?)";
 		jdbcTemplate.update(sql, 
 				new Object[] { cust.getName(), String.valueOf(cust.getGender()), cust.getEmail(),
 				String.valueOf(cust.getBirthYear()) });

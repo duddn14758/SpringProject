@@ -24,7 +24,7 @@ public class CustomerService implements ICustomerService {
 		while(true) {
 			//System.out.printf("\n[INFO] 고객 수 : %d, 인덱스 : %d\n");
 			System.out.println("메뉴를 입력하세요.");
-			System.out.println("(I)nsert, (P)revious, " +
+			System.out.println("(I)nsert, (P)rint, " +
 					"(U)pdate, (D)elete, (Q)uit");
 			System.out.print("메뉴 입력: ");
 			String menu = scan.next();
@@ -48,15 +48,15 @@ public class CustomerService implements ICustomerService {
 				break;
 			case 'p' :
 				System.out.println("고객 데이터를 출력합니다.");
-				custRepository = (ICustomerRepository) context.getBean("custPrintData");
-				System.out.println("축력할 고객 이름을 입력하십시요.");
+				custRepository = (ICustomerRepository) context.getBean("custPrint");
+				System.out.println("출력할 고객 이름을 입력하십시요.");
 				System.out.print("이름 : ");
 				cust.setName(scan.next());
 				custRepository.run(cust);
 				break;
 			case 'u' :
 				System.out.println("데이터를 수정합니다.");
-				custRepository = (ICustomerRepository) context.getBean("custUpdateData");
+				custRepository = (ICustomerRepository) context.getBean("custUpdate");
 				System.out.println("수정할 고객 이름을 입력하십시요.");
 				System.out.print("이름 : ");
 				cust.setName(scan.next());
@@ -64,7 +64,7 @@ public class CustomerService implements ICustomerService {
 				break;
 			case 'd' :
 				System.out.println("데이터를 삭제합니다.");
-				custRepository = (ICustomerRepository) context.getBean("custDeleteData");
+				custRepository = (ICustomerRepository) context.getBean("custDelete");
 				System.out.println("삭제할 고객 이름을 입력하십시요.");
 				System.out.print("이름 : ");
 				cust.setName(scan.next());

@@ -34,8 +34,17 @@ public class CustomerUpdateData implements ICustomerRepository {
 	//index 위치의 고객 정보를 수정합니다.
 	@Override
 	public boolean run(Customer cust) {
-	String sql = "update customer set gender=?, email=?, birthyear=? where name=?";
-		jdbcTemplate.update(sql, 
+		Customer custUpdate = new Customer();
+		String sql = "select name, gender, email, birthday "
+				+ "from customer where name=?";		
+		custUpdate = jdbcTemplate.queryForObject(sql, new CustomerMapper(), cust.getName());	
+		
+		if(custUpdate.equals(null)) {
+			System.out.println(cust.getName()+"은(는) 존재하지 않는 이름입니다.");
+		}
+		
+	String sqlupdate = "update customer set gender=?, email=?, birthday=? where name=?";
+		jdbcTemplate.update(sqlupdate, 
 			new Object[] { String.valueOf(cust.getGender()), cust.getEmail(),
 			String.valueOf(cust.getBirthYear()), cust.getName()});
 		return true;
