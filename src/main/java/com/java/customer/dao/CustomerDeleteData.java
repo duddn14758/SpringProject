@@ -14,18 +14,27 @@
  ************************************************************/
 package com.java.customer.dao;
 
-import java.util.ArrayList;
-import com.java.customer.model.Customer;;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.java.customer.model.Customer;
 
 /**
  * CustomerDeleteData.java
  * @author "Baniota"
  */
-public class CustomerDeleteData {
+@Repository
+public class CustomerDeleteData implements ICustomerRepository {
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
 	//index 위치의 고객정보를 삭제합니다.
-	public ArrayList<Customer> deleteCustomerData(ArrayList<Customer> custList, int index) {
-		custList.remove(index);
-		return custList;
+	@Override
+	public boolean run(Customer cust) {
+		String sql = "delete from customer where name=?";
+		jdbcTemplate.update(sql, cust.getName());
+		return true;
 	}
 }

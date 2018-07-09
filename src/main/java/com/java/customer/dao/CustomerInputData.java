@@ -14,41 +14,29 @@
  ************************************************************/
 package com.java.customer.dao;
 
-import java.util.Scanner;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.java.customer.model.Customer;
 
 /**
  * CustomerInputData.java
- * 
  * @author "Baniota"
  */
-public class CustomerInputData {
-	
+@Repository
+public class CustomerInputData implements ICustomerRepository {
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	public Customer insertCustomerData(Scanner scan) {
-		System.out.print("이름 : ");
-		String name = scan.next();
-		System.out.print("성별(M/F) : ");
-		char gender = scan.next().charAt(0);
-		System.out.print("이메일 : ");
-		String email = scan.next();
-		System.out.print("출생년도 : ");
-		int birthYear = scan.nextInt();
-
-		// 입력받은 데이터로 고객 객체를 생성
-		Customer cust = new Customer(name, gender, email, birthYear);
-
-		//String sql = "insert into info (name,gender,email,birthday) values(?,?,?,?)";
-		//jdbcTemplate.update(sql, cust.getName().toString(), cust.getGender(), cust.getEmail().toString(), cust.getBirthYear());
-		String sql="insert into info values('"+name+"','"+gender+"','"+email+"','"+birthYear+"')";
-		jdbcTemplate.update(sql);		
-		
-		return cust;
+	@Override
+	public boolean run(Customer cust) {
+		String sql = "insert into info (name, gender, email, birthday) values (?,?,?,?)";
+		jdbcTemplate.update(sql, 
+				new Object[] { cust.getName(), String.valueOf(cust.getGender()), cust.getEmail(),
+				String.valueOf(cust.getBirthYear()) });
+		return true;
 	}
 }

@@ -15,29 +15,29 @@
 package com.java.customer.dao;
 
 import java.util.Scanner;
-import com.java.customer.model.Customer;;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.java.customer.model.Customer;
 
 /**
  * CustomerUpdateData.java
  * @author "Baniota"
  */
-public class CustomerUpdateData {
+@Repository
+public class CustomerUpdateData implements ICustomerRepository {
+
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	//index 위치의 고객 정보를 수정합니다.
-	public  Customer updateCustomerData(Customer cust, Scanner scan) {
-		//Customer cust = custList.get(index);
-		System.out.println("---------UPDATE CUSTOMER INFO----------");
-		System.out.print("이름(" + cust.getName() + ") :");
-		cust.setName(scan.next());
-
-		System.out.print("성별(" + cust.getGender() + ") :");
-		cust.setGender(scan.next().charAt(0));
-
-		System.out.print("이메일(" + cust.getEmail() + ") :");
-		cust.setEmail(scan.next());
-
-		System.out.print("출생년도(" + cust.getBirthYear() + ") :");
-		cust.setBirthYear(scan.nextInt());
-		
-		return cust;
+	@Override
+	public boolean run(Customer cust) {
+	String sql = "update customer set gender=?, email=?, birthyear=? where name=?";
+		jdbcTemplate.update(sql, 
+			new Object[] { String.valueOf(cust.getGender()), cust.getEmail(),
+			String.valueOf(cust.getBirthYear()), cust.getName()});
+		return true;
 	}
 }

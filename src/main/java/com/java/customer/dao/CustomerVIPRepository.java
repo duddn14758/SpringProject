@@ -4,12 +4,12 @@
  * 프로그램명(ID) :
  * 프로그램 설명 :
  * 
- * 작성일 : 2018. 7. 5.
+ * 작성일 : 2018. 7. 8.
  * 작성자 : "Baniota"
  *
  * 수정자     수정일자     수정내역
  * ------    ----------    ---------------------------------
- * "Baniota"    2018. 7. 5.    최초 생성
+ * "Baniota"    2018. 7. 8.    최초 생성
  *
  ************************************************************/
 package com.java.customer.dao;
@@ -22,18 +22,34 @@ import org.springframework.stereotype.Repository;
 import com.java.customer.model.Customer;
 
 /**
- * CustomerPrintData.java
+ * CustomerVIPData.java
  * @author "Baniota"
  */
 @Repository
-public class CustomerPrintData implements ICustomerRepository {
+public class CustomerVIPRepository implements ICustomerVIPRepository {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	//고객데이터 출력
-	@Override
-	public boolean run(Customer cust) {
+	public boolean insertData(Customer cust) {
+		String sql = "insert into customer (name, gender, email, birthyear) values (?,?,?,?)";
+		jdbcTemplate.update(sql, 
+				new Object[] { cust.getName(), String.valueOf(cust.getGender()), cust.getEmail(),
+				String.valueOf(cust.getBirthYear()) });
+		return true;
+	}
+
+	//@Override
+	public boolean updateData(Customer cust) {
+	String sql = "update customer set gender=?, email=?, birthyear=? where name=?";
+		jdbcTemplate.update(sql, 
+			new Object[] { String.valueOf(cust.getGender()), cust.getEmail(),
+			String.valueOf(cust.getBirthYear()), cust.getName()});
+		return true;
+	}
+
+	//@Override
+	public boolean selectData(Customer cust) {
 		Customer custPrint = new Customer();
 		String sql = "select name, gender, email, birthyear "
 				+ "from customer where name=?";		
@@ -47,4 +63,12 @@ public class CustomerPrintData implements ICustomerRepository {
 		System.out.println("=======================================");
 		return true;
 	}
+
+	//@Override
+	public boolean deleteData(Customer cust) {
+		String sql = "delete from customer where name=?";
+		jdbcTemplate.update(sql, cust.getName());
+		return true;
+	}
+
 }

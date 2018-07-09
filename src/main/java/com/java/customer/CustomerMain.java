@@ -1,10 +1,8 @@
 package com.java.customer;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.java.customer.controller.CustomerController;
-import com.java.customer.service.CustomerService;
-import com.java.customer.service.ICustomerService;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 /************************************************************
  * 시스템 명 : 
@@ -23,13 +21,14 @@ import com.java.customer.service.ICustomerService;
 
 /**
  * CustomerMain.java
+ * 
  * @author "Baniota"
  */
 public class CustomerMain {
 	public static void main(String[] args) {
-		AbstractApplicationContext context=new GenericXmlApplicationContext("application-config.xml");
-		CustomerController custController=(CustomerController) context.getBean("custController");
-		
-		custController.run("customer");
+		AbstractApplicationContext context = new GenericXmlApplicationContext("application-config.xml");
+		CustomerController custController = (CustomerController) context.getBean("custController");
+
+		custController.run("javaya");
 	}
 }
