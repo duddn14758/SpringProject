@@ -16,7 +16,7 @@ public class CustomerController {
 	//@Resource(name = "niceService")
 	//@Autowired
 	//@Qualifier("helloService")
-	public void run(String name) {
-		System.out.println("HelloController : " + custService.run(name));
+	public void run() {
+		custService.run();
 	}
 }

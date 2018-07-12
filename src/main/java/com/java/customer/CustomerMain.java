@@ -29,6 +29,6 @@ public class CustomerMain {
 		AbstractApplicationContext context = new GenericXmlApplicationContext("application-config.xml");
 		CustomerController custController = (CustomerController) context.getBean("custController");
 
-		custController.run("javaya");
+		custController.run();
 	}
 }

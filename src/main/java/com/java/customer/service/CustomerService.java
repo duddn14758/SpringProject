@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService implements ICustomerService {
 
 	@Override
-	public String run(String name) {
+	public String run() {
 		//기본 입력장치로부터 데이터를 입력받기 위해 Scanner객체 생성
 		Scanner scan = new Scanner(System.in);
 

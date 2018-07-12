@@ -39,7 +39,7 @@ public class CustomerUpdateData implements ICustomerRepository {
 				+ "from customer where name=?";		
 		custUpdate = jdbcTemplate.queryForObject(sql, new CustomerMapper(), cust.getName());	
 		
-		if(custUpdate.equals(null)) {
+		if(custUpdate.getName().length()<=0) {
 			System.out.println(cust.getName()+"은(는) 존재하지 않는 이름입니다.");
 		}
 		
